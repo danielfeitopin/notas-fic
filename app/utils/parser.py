@@ -1,16 +1,16 @@
 from bs4 import BeautifulSoup
-import requests
-from requests import Response
 
 
-def request_data(study_code: str, lang: str = 'gl') -> Response:
-    url: str = f"https://estudos.udc.es/{lang}/study/quality/{study_code}"
-    response: Response = requests.get(url)
-    return response
+def extract_course_data(soup: BeautifulSoup, year: str) -> BeautifulSoup:
+    return soup.find(id=f'curse{year}')
 
 
-def process_course_data(course_data: BeautifulSoup) -> dict[str, str]:
-    processed_data: dict[str, str] = {
+def extract_subject_results(soup: BeautifulSoup, year: str) -> BeautifulSoup:
+    return soup.find(id=f'detailedresults{year}')
+
+
+def process_course_data(course_data: BeautifulSoup) -> dict[str, dict[str, str]]:
+    processed_data: dict[str, dict[str, str]] = {
         'study_data': {},
         'centre_data': {}
     }
@@ -61,10 +61,3 @@ def process_subject_results(subject_results: BeautifulSoup) -> dict[int, dict]:
             })
 
     return processed_results
-
-
-def process_data(study_data, subject_results) -> dict[str, dict[str, str]]:
-    data: dict[str, dict[str, str]] = {}
-    data['course_data'] = process_course_data(study_data)
-    data['subject_results'] = process_subject_results(subject_results)
-    return data

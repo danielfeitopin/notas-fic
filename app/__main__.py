@@ -1,40 +1,27 @@
+import json
 from bs4 import BeautifulSoup
-from app.utils.parser import request_data, process_data
+from pathlib import Path
+from requests import Response
+from app.utils.fetcher import fetch_all_data
+from app.utils.fetcher.sources import SOURCES
 from app.utils.db.insert_data import insert_data_into_db
 from app.utils.studies import STUDY_CODES
+from app.config import DATA_DIR, FETCH_DATA
+
 
 def main():
 
-    # Retrieve data
-    print(f"Requesting data for study code {STUDY_CODE} and year {YEAR}...")
-    html: str = request_data(STUDY_CODE, LANG).text
+    # Create directory for data if it doesn't exist
+    Path(DATA_DIR).mkdir(parents=True, exist_ok=True)
 
-    if html:
+    # Fetch data from sources
+    if FETCH_DATA:
+        fetch_all_data(SOURCES)
 
-        # Parse HTML
-        print("Data retrieved successfully. Parsing HTML...")
-        if not (soup := BeautifulSoup(html, features="html.parser")):
-            raise ValueError("Failed to parse HTML content.")
-
-        # Extract course data
-        print("Extracting course data...")
-        if not (course_data := soup.find(id=f'curse{YEAR}')):
-            print(f"Failed to extract course data for year {YEAR}.")
-
-        # Extract subject results
-        print("Extracting subject results...")
-        if not (subject_results := soup.find(id=f'detailedresults{YEAR}')):
-            print(f"Failed to extract subject results for year {YEAR}.")
-
-        # Process data
-        print("Processing data...")
-        data: dict[str, dict[str, str]] = process_data(
-            course_data, subject_results)
-        
-        # Insert data into DB
-        print("Inserting data into database...")
-        insert_data_into_db(YEAR, STUDY_CODE, data)
-        print("Data insertion completed successfully.")
+    # Insert data into DB
+    # print("Inserting data into database...")
+    # insert_data_into_db(YEAR, STUDY_CODE, data)
+    # print("Data insertion completed successfully.")
 
 
 if __name__ == "__main__":
