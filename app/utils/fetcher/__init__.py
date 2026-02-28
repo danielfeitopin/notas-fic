@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 from app.config import DATA_DIR
 from app.utils.parser import (extract_course_data, extract_subject_results,
-                              process_course_data, process_subject_results)
+                              process_course, process_subject_results)
 
 BASE_URL: str = "https://estudos.udc.es/{}/study/quality/{}"
 
@@ -22,9 +22,13 @@ def request_data(url: str) -> Response:
 def dump_data(data: dict, filename: Path) -> None:
 
     file_path: Path = DATA_DIR / filename
-
-    with open(file_path, 'w', encoding='utf-8') as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
+    
+    if file_path.exists():
+        print(f"File {file_path} already exists. Skipping...")
+        return
+    else:
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
 
 
 def fetch_all_data(sources: dict[str, dict[str, str]]) -> str:
@@ -45,13 +49,21 @@ def fetch_all_data(sources: dict[str, dict[str, str]]) -> str:
             soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
             
             # Process and save data
-            FILENAME_PREFIX: str = f"{source_name}_{year}"
             if (data := extract_course_data(soup, year)):
-                data: dict = process_course_data(data)
-                dump_data(data, f"{FILENAME_PREFIX}_course.json")
+                data: dict = process_course(data)
+                
+                # Save centre data
+                if centre_data := data.get('centre_data'):
+                    dump_data(centre_data, f"FIC_{year}_.json")
+                
+                # Save study data
+                if study_data := data.get('study_data'):
+                    dump_data(study_data, f"{source_name}_{year}_study.json")
 
             if (data := extract_subject_results(soup, year)):
                 data: dict = process_subject_results(data)
-                dump_data(data, f"{FILENAME_PREFIX}_subject_results.json")
+                
+                # Save subject results
+                dump_data(data, f"{source_name}_{year}_results.json")
 
             print(f"Data for {source_name} {year} saved successfully.")
