@@ -1,5 +1,5 @@
 from . import model
-from .model import Asignatura, Cursase, Anoacademico, Carreira, Oferta, init_database, create_tables
+from .model import Asignatura, Cursase, Anoacademico, Carreira, Oferta, init_database, create_tables, RATE_TYPES
 from .process_rates import process_rates_and_results
 
 def insert_data_into_db(YEAR: str, STUDY_CODE: str, data: dict[str, dict[str, str]]):
@@ -69,8 +69,8 @@ def insert_data_into_db(YEAR: str, STUDY_CODE: str, data: dict[str, dict[str, st
                 
     # Register the rates (Taxa) and results (Resultado)
     print("Processing rates and results...")
-    process_rates_and_results(YEAR, data, session, 'study_data')
-    process_rates_and_results(YEAR, data, session, 'centre_data')
+    process_rates_and_results(YEAR, data, session, RATE_TYPES[0], carreira=STUDY_CODE)
+    process_rates_and_results(YEAR, data, session, RATE_TYPES[1])
     print("Finished processing rates and results.")
 
     # Confirm changes

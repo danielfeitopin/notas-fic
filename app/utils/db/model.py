@@ -6,7 +6,7 @@ Base = declarative_base()
 engine = None
 Session = None
 
-RATE_TYPES = ["Estudo", "Centro"]
+RATE_TYPES = ["study_data", "centre_data"]
 
 RATE_CATEGORIES = [
     "Matriculación de estudantes",
@@ -34,95 +34,110 @@ RATE_NAMES = [
 ]
 
 RATE_DICT = {
-    "STUDY_0": (RATE_TYPES[0], RATE_CATEGORIES[0], RATE_NAMES[0]),
-    "STUDY_1": (RATE_TYPES[0], RATE_CATEGORIES[0], RATE_NAMES[1]),
-    "STUDY_2": (RATE_TYPES[0], RATE_CATEGORIES[0], RATE_NAMES[2]),
-    "STUDY_3": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[3]),
-    "STUDY_4": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[4]),
-    "STUDY_5": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[5]),
-    "STUDY_6": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[6]),
-    "STUDY_7": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[7]),
-    "STUDY_8": (RATE_TYPES[0], RATE_CATEGORIES[1], RATE_NAMES[8]),
-    "STUDY_9": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[9]),
-    "STUDY_10": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[10]),
-    "STUDY_11": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[11]),
-    "STUDY_12": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[12]),
-    "STUDY_13": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[13]),
-    "STUDY_14": (RATE_TYPES[0], RATE_CATEGORIES[2], RATE_NAMES[14]),
-    "CENTRE_0": (RATE_TYPES[1], RATE_CATEGORIES[0], RATE_NAMES[0]),
-    "CENTRE_1": (RATE_TYPES[1], RATE_CATEGORIES[0], RATE_NAMES[1]),
-    "CENTRE_2": (RATE_TYPES[1], RATE_CATEGORIES[0], RATE_NAMES[2]),
-    "CENTRE_3": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[3]),
-    "CENTRE_4": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[4]),
-    "CENTRE_5": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[5]),
-    "CENTRE_6": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[6]),
-    "CENTRE_7": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[7]),
-    "CENTRE_8": (RATE_TYPES[1], RATE_CATEGORIES[1], RATE_NAMES[8]),
-    "CENTRE_9": (RATE_TYPES[1], RATE_CATEGORIES[2], RATE_NAMES[9]),
-    "CENTRE_10": (RATE_TYPES[1], RATE_CATEGORIES[2], RATE_NAMES[10]),
-    "CENTRE_11": (RATE_TYPES[1], RATE_CATEGORIES[2], RATE_NAMES[11])
+    "STUDY_0": (RATE_CATEGORIES[0], (RATE_NAMES[0], None)),
+    "STUDY_1": (RATE_CATEGORIES[0], (RATE_NAMES[1], None)),
+    "STUDY_2": (RATE_CATEGORIES[0], (RATE_NAMES[2], None)),
+    "STUDY_3": (RATE_CATEGORIES[1], (RATE_NAMES[3], None)),
+    "STUDY_4": (RATE_CATEGORIES[1], (RATE_NAMES[4], None)),
+    "STUDY_5": (RATE_CATEGORIES[1], (RATE_NAMES[5], None)),
+    "STUDY_6": (RATE_CATEGORIES[1], (RATE_NAMES[6], None)),
+    "STUDY_7": (RATE_CATEGORIES[1], (RATE_NAMES[7], None)),
+    "STUDY_8": (RATE_CATEGORIES[1], (RATE_NAMES[8], None)),
+    "STUDY_9": (RATE_CATEGORIES[2], (RATE_NAMES[9], None)),
+    "STUDY_10": (RATE_CATEGORIES[2], (RATE_NAMES[10], None)),
+    "STUDY_11": (RATE_CATEGORIES[2], (RATE_NAMES[11], None)),
+    "STUDY_12": (RATE_CATEGORIES[2], (RATE_NAMES[12], None)),
+    "STUDY_13": (RATE_CATEGORIES[2], (RATE_NAMES[13], None)),
+    "STUDY_14": (RATE_CATEGORIES[2], (RATE_NAMES[14], None)),
+    "CENTRE_0": (RATE_CATEGORIES[0], RATE_NAMES[0]),
+    "CENTRE_1": (RATE_CATEGORIES[0], RATE_NAMES[1]),
+    "CENTRE_2": (RATE_CATEGORIES[0], RATE_NAMES[2]),
+    "CENTRE_3": (RATE_CATEGORIES[1], RATE_NAMES[3]),
+    "CENTRE_4": (RATE_CATEGORIES[1], RATE_NAMES[4]),
+    "CENTRE_5": (RATE_CATEGORIES[1], RATE_NAMES[5]),
+    "CENTRE_6": (RATE_CATEGORIES[1], RATE_NAMES[6]),
+    "CENTRE_7": (RATE_CATEGORIES[1], RATE_NAMES[7]),
+    "CENTRE_8": (RATE_CATEGORIES[1], RATE_NAMES[8]),
+    "CENTRE_9": (RATE_CATEGORIES[2], RATE_NAMES[9]),
+    "CENTRE_10": (RATE_CATEGORIES[2], RATE_NAMES[10]),
+    "CENTRE_11": (RATE_CATEGORIES[2], RATE_NAMES[11])
 }
 
 
 # Tables
 class Carreira(Base):
     __tablename__ = "Carreira"
-    Código = Column(String, primary_key=True)
-    Nome = Column(String, nullable=False)
-    Siglas = Column(String, nullable=False)
+    codigo = Column("Código", String, primary_key=True)
+    nome = Column("Nome", String, nullable=False)
+    siglas = Column("Siglas", String, nullable=False)
 
 
 class Asignatura(Base):
     __tablename__ = "Asignatura"
-    Código = Column(String, primary_key=True)
-    Nome = Column(String, nullable=False)
-    Siglas = Column(String, nullable=False)
+    codigo = Column("Código", String, primary_key=True)
+    nome = Column("Nome", String, nullable=False)
+    siglas = Column("Siglas", String, nullable=False)
 
 
 class Anoacademico(Base):
     __tablename__ = "Anoacadémico"
-    Código = Column(String, primary_key=True)
-    Inicio = Column(Integer, nullable=False)
-    Fin = Column(Integer, nullable=False)
+    codigo = Column("Código", String, primary_key=True)
+    inicio = Column("Inicio", Integer, nullable=False)
+    fin = Column("Fin", Integer, nullable=False)
 
 
-class Taxa(Base):
-    __tablename__ = "Taxa"
-    Código = Column(String, primary_key=True)
-    Tipo = Column(String, nullable=False)
-    Categoría = Column(String, nullable=False)
-    Nome = Column(String, nullable=False)
+class Taxaestudo(Base):
+    __tablename__ = "Taxaestudo"
+    codigo = Column("Código", String, primary_key=True)
+    categoria = Column("Categoría", String, nullable=False)
+    nome = Column("Nome", String, nullable=False)
+    codigo_carreira = Column("Código_Carreira", String, ForeignKey("Carreira.Código"), primary_key=True)
+    
+class Taxacentro(Base):
+    __tablename__ = "Taxacentro"
+    codigo = Column("Código", String, primary_key=True)
+    categoria = Column("Categoría", String, nullable=False)
+    nome = Column("Nome", String, nullable=False)
 
 
 class Oferta(Base):
     __tablename__ = "Oferta"
-    Código_Carreira = Column(String, ForeignKey("Carreira.Código"), primary_key=True)
-    Código_Asignatura = Column(
-        String, ForeignKey("Asignatura.Código"), primary_key=True
+    codigo_carreira = Column("Código_Carreira", String, ForeignKey("Carreira.Código"), primary_key=True)
+    codigo_asignatura = Column(
+        "Código_Asignatura", String, ForeignKey("Asignatura.Código"), primary_key=True
     )
-    Curso = Column(Integer, nullable=False)
+    curso = Column(Integer, nullable=False)
 
 
 class Cursase(Base):
     __tablename__ = "Cúrsase"
-    Código_Anoacadémico = Column(
-        String, ForeignKey("Anoacadémico.Código"), primary_key=True
+    codigo_anoacademico = Column(
+        "Código_Anoacadémico", String, ForeignKey("Anoacadémico.Código"), primary_key=True
     )
-    Código_Asignatura = Column(
-        String, ForeignKey("Asignatura.Código"), primary_key=True
+    codigo_asignatura = Column(
+        "Código_Asignatura", String, ForeignKey("Asignatura.Código"), primary_key=True
     )
-    Aprobados = Column(Integer, nullable=False)
-    Suspensos = Column(Integer, nullable=False)
-    NP = Column(Integer, nullable=False)
+    aprobados = Column("Aprobados", Integer, nullable=False)
+    suspensos = Column("Suspensos", Integer, nullable=False)
+    np = Column("NP", Integer, nullable=False)
 
 
-class Resultado(Base):
-    __tablename__ = "Resultado"
-    Código_Anoacadémico = Column(
-        String, ForeignKey("Anoacadémico.Código"), primary_key=True
+class Resultadoestudo(Base):
+    __tablename__ = "Resultadoestudo"
+    codigo_anoacademico = Column(
+        "Código_Anoacadémico", String, ForeignKey("Anoacadémico.Código"), primary_key=True
     )
-    Código_Taxa = Column(String, ForeignKey("Taxa.Código"), primary_key=True)
-    Valor = Column(Float, nullable=False)
+    codigo_taxa = Column("Código_Taxa", String, ForeignKey("Taxaestudo.Código"), primary_key=True)
+    codigo_carreira = Column("Código_Carreira", String, ForeignKey("Carreira.Código"), primary_key=True)
+    valor = Column("Valor", Float, nullable=False)
+    
+class Resultadocentro(Base):
+    __tablename__ = "Resultadocentro"
+    codigo_anoacademico = Column(
+        "Código_Anoacadémico", String, ForeignKey("Anoacadémico.Código"), primary_key=True
+    )
+    codigo_taxa = Column("Código_Taxa", String, ForeignKey("Taxacentro.Código"), primary_key=True)
+    valor = Column("Valor", Float, nullable=False)
 
 
 def init_database(db_path: str = "sqlite:///notasfic.db"):
