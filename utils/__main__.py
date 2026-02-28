@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
-from .parser import request_data, process_data, STUDY_CODES
+from .parser import request_data, process_data
 from .insert_data import insert_data_into_db
+from .studies import STUDY_CODES
 
 def main():
 

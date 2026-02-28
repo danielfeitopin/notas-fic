@@ -2,12 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 from requests import Response
 
-STUDY_CODES: dict[str, str] = {
-    'GEI': '614G01V01',
-    'GCED': '614G02V01',
-    'GIA': '614G03V01',
-}
-
 
 def request_data(study_code: str, lang: str = 'gl') -> Response:
     url: str = f"https://estudos.udc.es/{lang}/study/quality/{study_code}"
