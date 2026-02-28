@@ -24,20 +24,22 @@ def process_course_data(course_data: BeautifulSoup) -> dict[str, str]:
     study_data, centre_data = course_data.find_all(class_='span5')
 
     # Process study data
-    for i, table in enumerate(study_data.find_all('table')):
+    index: int = 0
+    for table in study_data.find_all('table'):
         table_body: BeautifulSoup = table.find('tbody')
         for row in table_body.find_all('tr'):
-            processed_data['study_data'][f'STUDY_{i}'] = row.find_all(
+            processed_data['study_data'][f'STUDY_{index}'] = row.find_all(
                 'td')[-1].text.strip()
-            i += 1
+            index += 1
 
     # Process centre data
-    for i, table in enumerate(centre_data.find_all('table')):
+    index: int = 0
+    for table in centre_data.find_all('table'):
         table_body: BeautifulSoup = table.find('tbody')
         for row in table_body.find_all('tr'):
-            processed_data['centre_data'][f'CENTRE_{i}'] = row.find_all(
+            processed_data['centre_data'][f'CENTRE_{index}'] = row.find_all(
                 'td')[-1].text.strip()
-            i += 1
+            index += 1
 
     return processed_data
 
