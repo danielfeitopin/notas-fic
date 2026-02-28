@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from .parser import request_data, process_data, STUDY_CODES
+from .insert_data import insert_data_into_db
 
 def main():
 
@@ -29,7 +30,10 @@ def main():
         data: dict[str, dict[str, str]] = process_data(
             course_data, subject_results)
         
-        print(data)
+        # Insert data into DB
+        print("Inserting data into database...")
+        insert_data_into_db(YEAR, STUDY_CODE, data)
+        print("Data insertion completed successfully.")
 
 
 if __name__ == "__main__":
