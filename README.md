@@ -6,6 +6,30 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Notas FIC
 
+<div align="center">
+
+***Portal estatístico para as materias das titulacións da FIC.***
+
+[![Python](https://img.shields.io/badge/Python_3.10-black?logo=python&logoColor=white&labelColor=grey&color=%233776AB)](<https://www.python.org/> "Python")
+[![HTML5](https://img.shields.io/badge/HTML_5-white?logo=html5&logoColor=white&labelColor=grey&color=%23E34F26)](#)
+[![CSS3](https://img.shields.io/badge/CSS_3-white?logo=css&logoColor=white&labelColor=grey&color=%23663399)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-white?logo=javascript&logoColor=white&label=%20&labelColor=grey&color=%23F7DF1E)](#)
+[![SQLite](https://img.shields.io/badge/SQLite-white?logo=sqlite&logoColor=white&label=%20&labelColor=grey&color=%23003B57)](<https://www.sqlite.org/> "SQLite")
+[![Flask](https://img.shields.io/badge/Flask-white?logo=flask&logoColor=white&labelColor=grey&color=%233CACBC)](<https://flask.palletsprojects.com/> "Flask")
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-white?logo=sqlalchemy&logoColor=white&labelColor=grey&color=%23D71F00)](<https://www.sqlalchemy.org/> "SQLAlchemy")
+[![Chart.js](https://img.shields.io/badge/Chart.js-white?logo=chartdotjs&logoColor=white&labelColor=grey&color=%23FF6384)](<https://www.chartjs.org/> "Chart.js")
+
+
+[![License](<https://img.shields.io/github/license/danielfeitopin/notas-fic>)](<LICENSE> "License")
+[![GitHub issues](https://img.shields.io/github/issues/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic> "Issues")
+[![REUSE status](https://api.reuse.software/badge/github.com/danielfeitopin/notas-fic)](https://api.reuse.software/info/github.com/danielfeitopin/notas-fic)
+
+
+[![GitHub stars](https://img.shields.io/github/stars/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic/stargazers> "Stars")
+[![GitHub watchers](https://img.shields.io/github/watchers/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic/watchers> "Watchers")
+[![GitHub forks](https://img.shields.io/github/forks/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic/forks> "Forks")
+
+
 📊 NotasFIC é un proxecto de código aberto que ofrece unha plataforma para visualizar datos históricos de resultados dos diferentes graos da Facultade de Informática da Universidade da Coruña. O proxecto ten como obxectivo proporcionar unha ferramenta útil para estudantes e calquera persoa interesada en analizar a evolución dos resultados académicos ao longo do tempo.
 
 ## Como xordeu esta idea?
