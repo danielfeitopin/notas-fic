@@ -32,6 +32,43 @@
 | HTML/CSS/JS       | Frontend                                |
 | Chart.js          | Biblioteca para gráficos interactivos   |  
 
+## Ao ataque!
+
+Para empregar esta plataforma debense seguir os seguintes pasos:
+
+1. Clonar o respositorio.
+- Abre unha terminal, diríxete ao directorio que máis che guste e executa o seguinte comando:
+
+```bash
+git clone https://github.com/danielfeitopin/notas-fic.git
+```
+- Entra no proxecto.
+```bash
+cd notas-fic
+```
+
+2. Instalar dependencias.
+- Crea un entorno virtual de Python (nós empregamos venv).
+```bash
+python3 -m venv .venv
+source .venv/bin/activate # Linux
+.\venv\Scripts\activate # Windows
+```
+- Descarga o indicado no arquivo *requirements.txt*
+```bash
+pip install -r requirements.txt
+```
+
+3. Inicia a túa aventura.
+- Executa o comando:
+```bash
+python -m flask run --port=5000
+```
+
+> [!NOTE]
+> Podes indicar outro número de porto dispoñible se o prefires.
+
+
 ## Licencia
 
 📃 Este proxecto está licenciado baixo a [GNU General Public License version 3](<https://opensource.org/license/gpl-3-0>). Pódese atopar unha copia desta licencia no arquivo [LICENSE], e na carpeta [LICENSES].
