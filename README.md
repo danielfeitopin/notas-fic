@@ -45,6 +45,7 @@
 | 🟢 Modificación   | 🔵 Mesma licenza                 |             |
 | 🟢 Uso de patente  | 🔵 Cambios de estado                |             |
 | 🟢 Uso privado    |                                 |             |   
+
 _Táboa baseada en [choosealicense.com](<https://choosealicense.com/licenses/gpl-3.0/>)_
 
 </div>
