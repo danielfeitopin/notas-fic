@@ -29,6 +29,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 [![GitHub watchers](https://img.shields.io/github/watchers/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic/watchers> "Watchers")
 [![GitHub forks](https://img.shields.io/github/forks/danielfeitopin/notas-fic)](<https://github.com/danielfeitopin/notas-fic/forks> "Forks")
 
+</div>
 
 📊 NotasFIC é un proxecto de código aberto que ofrece unha plataforma para visualizar datos históricos de resultados dos diferentes graos da Facultade de Informática da Universidade da Coruña. O proxecto ten como obxectivo proporcionar unha ferramenta útil para estudantes e calquera persoa interesada en analizar a evolución dos resultados académicos ao longo do tempo.
 
