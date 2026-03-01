@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Datos - NotasFIC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Chart.js CDN (loaded from CDN for convenience) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Botón para togglear modo oscuro -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+
+    <main>
+        <!-- Contenedor de página principal (lista de carreras + gráficos globales) -->
+        <div id="mainPage" class="main-page">
+            <h1>Visualización de Datos - NotasFIC</h1>
+            
+            <!-- Lista de Carreras Clicables -->
+            <div class="carreras-section">
+                <h2>Carreiras</h2>
+                <ul class="carreras-list" id="carrerasList">
+                    <li>Cargando...</li>
+                </ul>
+            </div>
+
+            <!-- Sección de Gráficos -->
+            <div class="charts-container">
+
+
+            
+
+
+
+            <!-- Gráfico 3: Degree Comparation -->
+            <div class="chart-box">
+                <h2>Comparación de Carreiras</h2>
+                <canvas id="chartComparacion"></canvas>
+            </div>
+
+            <!-- Gráfico 3b: Distribución por Sexo (Mujeres vs Hombres) 
+            <div class="chart-box" id="chartSexoContainer">
+                <h2>Distribución por Sexo por Carreira</h2>
+                <div id="sexoChartsWrapper" class="sexo-charts-wrapper"></div>
+            </div>-->
+
+
+
+            <!-- Gráfico 5: Most failed subjects -->
+            <div class="chart-box" id="chartSuspensosContainer" style="display:none;">
+                <h2>Asignaturas con Mais Suspensos</h2>
+                <canvas id="chartSuspensos"></canvas>
+            </div>
+
+
+            </div>
+        </div>
+
+        <!-- Contenedor de página de carrera (mostrado cuando se selecciona una) -->
+        <div id="carreraPage" class="carrera-page" style="display:none;">
+            <header class="carrera-header">
+                <a href="/" class="back-link">← Volver</a>
+                <h1 id="carreraTitle">Carrera</h1>
+            </header>
+            <!-- Contenedor para desplegables (selectors) -->
+            <div id="selectorsContainer" class="selectors-container">
+                <!-- Los desplegables se insertan aquí dinámicamente -->
+            </div>
+            <div class="carrera-content">
+                <!-- Los gráficos se insertan aquí dinámicamente -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>made with ❤️ by danielfeitopin, L1911, marioozon</p>
+    </footer>
+
+    <!-- Archivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        // ============================================
+        // MODO OSCURO / CLARO
+        // ============================================
+        
+        // Cargar preferencia guardada al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            }
+        });
+        
+        // Función para togglear modo oscuro
+        function toggleDarkMode() {
+            const body = document.body;
+            const toggleBtn = document.getElementById('themeToggle');
+            
+            body.classList.toggle('dark-mode');
+            
+            // Guardar preferencia
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            // Actualizar icono del botón
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+        }
+
+        // valor pasado desde Flask cuando se visita /carrera/<siglas>
+        const selectedCareer = "{{ selected_carrera or '' }}";
+        // Cargar la lista de carreras
+        async function cargarCarreras() {
+            try {
+                const response = await fetch('/api/carreiras');
+                const carreiras = await response.json();
+                
+                const lista = document.getElementById('carrerasList');
+                lista.innerHTML = '';
+                
+                // Opción "Ver todos"
+                const liTodos = document.createElement('li');
+                const aTodos = document.createElement('a');
+                aTodos.href = '/';
+                aTodos.textContent = 'Ver todos';
+                liTodos.appendChild(aTodos);
+                lista.appendChild(liTodos);
+                
+                // Cada carrera
+                carreiras.forEach(carrera => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `/carrera/${carrera.siglas}`;
+                    a.textContent = `${carrera.nome} (${carrera.siglas})`;
+                    li.appendChild(a);
+                    lista.appendChild(li);
+                });
+                // si hemos llegado con una carrera seleccionada, abrirla
+                if (selectedCareer) {
+                    cargarVistaCarrera(selectedCareer);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        // Mostrar vista de carrera específica (primer gráfico top‑suspensos)
+        async function cargarVistaCarrera(siglas) {
+            // Obtener datos de la carrera para el título
+            const carreirasResponse = await fetch('/api/carreiras');
+            const carreiras = await carreirasResponse.json();
+            const carreraData = carreiras.find(c => c.siglas === siglas);
+            const carreraLabel = carreraData ? `${carreraData.nome} (${carreraData.siglas})` : siglas;
+            
+            // Ocultar página principal y mostrar página de carrera
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('carreraPage').style.display = 'block';
+            document.getElementById('carreraTitle').textContent = carreraLabel;
+            
+            // Limpiar contenido previo
+            const selectorsContainer = document.getElementById('selectorsContainer');
+            const carreraContent = document.querySelector('.carrera-content');
+            selectorsContainer.innerHTML = '';
+            carreraContent.innerHTML = '';
+            
+            // Cargar los desplegables en el contenedor superior
+            cargarAsignaturasCarrera(siglas, selectorsContainer);
+            cargarAnosCarrera(siglas, selectorsContainer);
+            
+            // Crear contenedores para los gráficos
+            const chartsDiv = document.createElement('div');
+            chartsDiv.className = 'career-charts-page';
+            
+            // Cargar los gráficos en este contenedor
+            await cargarGraficoMasSuspensosFor(siglas, chartsDiv);
+            
+            // Crear contenedor para el gráfico D (evolución temporal)
+            const evolDiv = document.createElement('div');
+            evolDiv.className = 'evolucion-carrera-container';
+            chartsDiv.appendChild(evolDiv);
+            cargarGraficoEvolucionCarrera(siglas, evolDiv);
+            
+            // Añadir todo al contenedor de la página
+            carreraContent.appendChild(chartsDiv);
+        }
+        
+        
+        cargarCarreras();
+    </script>
+
+
+</body>
+</html>
+

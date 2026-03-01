@@ -1,0 +1,539 @@
+/* ============================================
+   RESET AND MAIN STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ============================================
+   MAIN STRUCTURE
+   ============================================ */
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+
+/* ============================================
+   HEADING STYLES
+   ============================================ */
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #326e76;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.button-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gei {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-gced {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-gia {
+    background-color: #FF9800;
+    color: white;
+}
+
+
+/* ============================================
+    CHART STYLES
+   ============================================ */
+
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 3rem;
+}
+
+.chart-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart-box canvas {
+    max-height: 300px;
+}
+
+/* ============================================
+    DEGREE STYLES
+   ============================================ */
+   
+.carreras-list {
+    list-style: none;
+    padding: 0;
+}
+
+.carreras-list li {
+    margin: 10px 0;
+}
+
+.carreras-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    display: inline-block;
+    background: #ecf0f1;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.carreras-list a:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* contenedor para gráficos de cada carrera, oculto hasta clic */
+.career-charts {
+    display: none;
+    margin-top: 1rem;
+}
+
+.career-charts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+/* selector de asignatura y contenedor de evolución dentro de carrera */
+.career-charts select,
+.career-charts-page select {
+    display: none;
+}
+
+.evolucion-container {
+    margin-top: 1rem;
+    display: none;
+}
+
+/* selector de año académico dentro de la vista de carrera */
+.career-charts .year-select {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.career-charts-page .year-select {
+    display: none;
+}
+
+.topnp-container {
+    margin-top: 1rem;
+}
+
+.career-charts-page .topnp-container {
+    margin-top: 1rem;
+}
+
+.evolucion-carrera-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.career-charts-page .evolucion-carrera-container {
+    margin-top: 0;
+}
+
+#chartSuspensosContainer {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Estilos para la sección de carreras */
+.carreras-section {
+    width: 100%;
+    max-width: 1400px;
+    margin-bottom: 2rem;
+}
+
+.carreras-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #326e76;
+}
+
+.carreras-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.carreras-list li {
+    margin: 5px 0;
+}
+
+.carreras-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 8px 16px;
+    display: inline-block;
+    background: #ecf0f1;
+    border-radius: 5px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.carreras-list a:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* ============================================
+   CARRERA PAGE STYLES
+   ============================================ */
+
+/* Página dedicada a una carrera */
+.carrera-page {
+    width: 100%;
+    padding: 2rem;
+}
+
+.carrera-header {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid #326e76;
+    padding-bottom: 1rem;
+}
+
+.back-link {
+    color: #326e76;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: #ecf0f1;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.back-link:hover {
+    background: #3498db;
+    color: white;
+}
+
+.carrera-header h1 {
+    margin: 0;
+    margin-bottom: 0;
+    flex: 1;
+    text-align: left;
+}
+
+/* Contenedor de selectores/desplegables */
+.selectors-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.selectors-container select {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.carrera-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.career-charts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+/* Main page container */
+.main-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-page h1 {
+    margin-bottom: 2rem;
+}
+
+/* Asegurar que los chart-box dentro de la página de carrera se centren */
+.career-charts-page .chart-box {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.career-charts-page .subchart {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+body.dark-mode h1 {
+    color: #f0f0f0;
+}
+
+body.dark-mode h2 {
+    color: #f0f0f0;
+}
+
+body.dark-mode .chart-box {
+    background-color: #2d2d2d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .chart-box h2 {
+    color: #f0f0f0;
+}
+
+body.dark-mode footer {
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+}
+
+body.dark-mode .carreras-list a {
+    color: #f0f0f0;
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .carreras-list a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+body.dark-mode .selectors-container {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .selectors-container select {
+    background-color: #404040;
+    color: #f0f0f0;
+    border-color: #555;
+}
+
+body.dark-mode .carrera-header {
+    border-bottom-color: #555;
+}
+
+body.dark-mode .back-link {
+    background-color: #404040;
+    color: #f0f0f0;
+}
+
+body.dark-mode .back-link:hover {
+    background-color: #555;
+}
+
+body.dark-mode .evolucion-carrera-container {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .carreras-section h2 {
+    color: #f0f0f0;
+}
+
+/* Botón toggle */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+body:not(.dark-mode) .theme-toggle {
+    background-color: #333;
+    color: white;
+}
+
+body.dark-mode .theme-toggle {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Estilos para enlaces en modo oscuro */
+body.dark-mode main p a {
+    color: #4dabf7;
+}
+
+/* Estilos para la página de carrera en modo oscuro */
+body.dark-mode .back-link {
+    background-color: #404040;
+    color: #f0f0f0;
+}
+
+body.dark-mode .back-link:hover {
+    background-color: #555;
+}
+
+body.dark-mode .selectors-container {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .selectors-container select {
+    background-color: #404040;
+    color: #f0f0f0;
+    border-color: #555;
+}
+
+body.dark-mode .evolucion-carrera-container {
+    background-color: #2d2d2d;
+}
+
+/* ============================================
+   SEXO CHARTS WRAPPER (Tartas Mujeres vs Hombres)
+   ============================================ */
+
+.sexo-charts-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.sexo-chart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+}
+
+.sexo-chart-item h3 {
+    margin-bottom: 1rem;
+    color: #326e76;
+    font-size: 1.1rem;
+}
+
+.sexo-chart-item canvas {
+    max-width: 250px;
+    max-height: 250px;
+}
+
+/* Estilos para mensajes de error y sin datos */
+.no-data-message {
+    color: #666;
+    font-style: italic;
+    padding: 1rem;
+    text-align: center;
+}
+
+.error-message {
+    color: #d32f2f;
+    padding: 1rem;
+    text-align: center;
+}
+

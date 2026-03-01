@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignatura {{ codigo_asignatura }} - NotasFIC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Botón para togglear modo oscuro -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+
+    <main>
+        <h1>Asignatura {{ codigo_asignatura }}</h1>
+        <p><a href="/">← Volver al inicio</a></p>
+
+        <div class="chart-box">
+            <h2>Evolución de resultados</h2>
+            <canvas id="chartAsignaturaEvol"></canvas>
+        </div>
+    </main>
+    <footer>
+        <p>made with ❤️ by danielfeitopin, L1911, marioozon</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Cargar preferencia de modo oscuro
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggle').textContent = '☀️';
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const codigo = "{{ codigo_asignatura }}";
+            if (codigo) {
+                const canvas = document.getElementById('chartAsignaturaEvol');
+                if (canvas && typeof cargarGraficoEvolucionAsignatura === 'function') {
+                    cargarGraficoEvolucionAsignatura(codigo, canvas);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

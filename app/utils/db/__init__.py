@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker, scoped_session
 from app.config import DB_PATH
 from .model import Base
 
 ENGINE = create_engine(DB_PATH)
-SESSION: Session = sessionmaker(bind=ENGINE)
-
+#SESSION: Session = sessionmaker(bind=ENGINE)
+SESSION = scoped_session(sessionmaker(bind=ENGINE))
 
 def create_tables():
     """Creates the tables in the database based on the defined models."""

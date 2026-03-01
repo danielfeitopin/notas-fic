@@ -1,6 +1,6 @@
 import pathlib
 
-FETCH_DATA: bool = False
+FETCH_DATA: bool = True
 CREATE_TABLES: bool = True
 
 BASE_DIR: pathlib.Path = pathlib.Path(__file__).parent.parent
