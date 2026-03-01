@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Daniel Feito-Pin <danielfeitopin+github@protonmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from pathlib import Path
 from app.utils.fetcher import fetch_all_data

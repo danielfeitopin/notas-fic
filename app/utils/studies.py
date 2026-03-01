@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Daniel Feito-Pin <danielfeitopin+github@protonmail.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 STUDY_CODES: dict[str, str] = {
     'GEI': '614G01V01',
     'GCED': '614G02V01',

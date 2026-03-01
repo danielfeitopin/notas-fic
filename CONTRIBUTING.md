@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Daniel Feito-Pin <danielfeitopin+github@protonmail.com>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Contributing to Notas-FIC
 
 Thank you for your interest in contributing to [Notas-FIC](<https://github.com/danielfeitopin/notas-fic>)! We appreciate your time and effort in helping improve this project.

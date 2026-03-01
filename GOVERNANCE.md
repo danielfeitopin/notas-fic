@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Daniel Feito-Pin <danielfeitopin+github@protonmail.com>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # Project governance
 
 This document describes how decisions are made in the project, who can make them, and how anyone can participate in the community.
