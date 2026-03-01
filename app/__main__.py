@@ -1,12 +1,10 @@
-import json
-from bs4 import BeautifulSoup
+
 from pathlib import Path
-from requests import Response
 from app.utils.fetcher import fetch_all_data
 from app.utils.fetcher.sources import SOURCES
-from app.utils.db.insert_data import insert_data_into_db
-from app.utils.studies import STUDY_CODES
-from app.config import DATA_DIR, FETCH_DATA
+from app.utils.db.insert_data import insert_data
+from app.config import DATA_DIR, FETCH_DATA, CREATE_TABLES
+from app.utils.db import create_tables, drop_tables
 
 
 def main():
@@ -19,16 +17,14 @@ def main():
         fetch_all_data(SOURCES)
 
     # Insert data into DB
-    # print("Inserting data into database...")
-    # insert_data_into_db(YEAR, STUDY_CODE, data)
-    # print("Data insertion completed successfully.")
+    if CREATE_TABLES:
+        print("Inserting data into database...")
+        drop_tables()
+        create_tables()
+        insert_data()
 
 
 if __name__ == "__main__":
-
-    STUDY_CODE: str = STUDY_CODES.get('GCED', '')
-    YEAR: str = '2024'
-    LANG: str = 'gl'
 
     try:
         main()

@@ -17,7 +17,10 @@ GCED_SOURCES: dict[str, str] = {
 }
 
 GIA_SOURCES: dict[str, str] = {
-
+    '2022': f'https://web.archive.org/web/20250713204022/{get_study_url(STUDY_CODES["GIA"])}',
+    '2023': f'https://web.archive.org/web/20250713204022/{get_study_url(STUDY_CODES["GIA"])}',
+    '2024': get_study_url(STUDY_CODES["GIA"]),
+    '2025': get_study_url(STUDY_CODES["GIA"]),
 }
 
 SOURCES: dict[str, dict[str, str]] = {
